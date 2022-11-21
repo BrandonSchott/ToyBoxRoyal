@@ -8,7 +8,7 @@ public class PlayerControl : MonoBehaviour
     float hInput, vInput, mouseX, mouseY;
 
     [SerializeField]
-    GameObject thirdPersonCamera, cameraX, cameraY, hitbox1, hitbox2;
+    GameObject thirdPersonCamera, cameraX, cameraY, hitbox1, hitbox2, panel;
 
     [SerializeField]
     float movementSpeed, rotationSpeed;
@@ -66,6 +66,10 @@ public class PlayerControl : MonoBehaviour
             hitbox2.SendMessage("Active");
         }
 
-
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            panel.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 }
