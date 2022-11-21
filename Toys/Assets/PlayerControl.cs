@@ -8,19 +8,24 @@ public class PlayerControl : MonoBehaviour
     float hInput, vInput, mouseX, mouseY;
 
     [SerializeField]
-    GameObject thirdPersonCamera, cameraX, cameraY, hitbox1, hitbox2, panel;
+    GameObject thirdPersonCamera, cameraX, cameraY, hitbox1, hitbox2, panel, winMessage;
+
+    [SerializeField]
+    List<GameObject> enemies = new List<GameObject>();
 
     [SerializeField]
     float movementSpeed, rotationSpeed;
 
     Animator myAnimator;
     float attackTimeStamp;
+    bool winner;
     // Start is called before the first frame update
     void Start()
     {
         movementSpeed = 5;
         rotationSpeed = 500;
         myAnimator = GetComponent<Animator>();
+        winner = false;
 
     }
 
@@ -70,6 +75,19 @@ public class PlayerControl : MonoBehaviour
         {
             panel.SetActive(true);
             Time.timeScale = 0;
+        }
+        winner = true;
+        foreach(GameObject enemy in enemies)
+        {
+            if(enemy.activeSelf)
+            {
+                winner = false;
+            }
+        }
+
+        if(winner)
+        {
+            winMessage.SetActive(true);
         }
     }
 }
